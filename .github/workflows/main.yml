@@ -1,0 +1,20 @@
+name : "Check Number is Even or Odd"
+on: 
+  workflow_dispatch:
+    inputs:
+      number:
+        description: 'Enter number to check whether it is Even or Odd'     
+        required: true
+        type: number
+env:
+ file: even.py
+ number: ${{ github.event.inputs.number }}
+jobs:
+  checkNumber:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+       python-version: '3.10' 
+    - run: python $file $number
